@@ -1,4 +1,5 @@
 import React from "react";
+import "./Aside.scss";
 
 class Aside extends React.Component {
 	render() {
