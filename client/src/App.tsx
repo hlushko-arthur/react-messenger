@@ -1,10 +1,9 @@
 import './App.css';
+import Aside from './components/Aside/Aside';
 
 function App() {
   return (
-      <div className="wrapper">
-		<h1>Hello world</h1>
-	  </div>
+      <Aside></Aside>
   );
 }
 
