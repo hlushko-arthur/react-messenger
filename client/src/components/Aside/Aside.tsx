@@ -11,7 +11,7 @@ class Aside extends React.Component {
 				<div className="nav_item">
 					Friends
 				</div>
-				<div className="nav_item">
+				<div className="nav_item active">
 					Messages
 				</div>
 			</div>

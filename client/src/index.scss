@@ -1,4 +1,4 @@
-@import 'scss/vars';
+@use 'scss/vars';
 
 html,
 body {
@@ -6,4 +6,9 @@ body {
 	margin: 0;
 	width: 100vw;
 	height: 100vh;
+	font-family: Roboto, sans-serif;
+	color: #F6F6F6;
+	font-size: 1rem;
+	letter-spacing: 0.05rem;
+	// letter-spacing: 1px;
 }
