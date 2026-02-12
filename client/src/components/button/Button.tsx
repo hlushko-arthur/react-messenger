@@ -8,12 +8,20 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 class Button extends React.Component<ButtonProps> {
 	render() {
-		const { secondary } = this.props;
+ 		const { secondary, className } = this.props;
 
-		return (
-			<button className={secondary ? 'button-secondary' : ''}>{this.props.children}</button>
-		);
-	}
+ 		const classes = [className, secondary ? 'button-secondary' : ''].filter(Boolean).join(' ');
+
+ 		return (
+ 			<button
+				className={classes}
+				onClick={this.props.onClick}
+				disabled={this.props.disabled}
+			>
+				{this.props.children}
+			</button>
+ 		);
+ 	}
 }
 
 export default Button;
