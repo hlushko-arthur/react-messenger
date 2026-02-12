@@ -20,6 +20,7 @@ export default defineConfig([
       '@stylistic': stylistic,
     },
     rules: {
+      "indent": ["error", "tab"],
       '@stylistic/semi': ['error', 'always'],
       '@stylistic/no-trailing-spaces': 'error',
       '@stylistic/semi-spacing': 'error',
