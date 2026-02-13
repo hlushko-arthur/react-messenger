@@ -1,6 +1,6 @@
 import express from "express";
+import User from "./user.collection";
+
 const router = express.Router();
-const User = require("./user.collection");
 
-
-module.exports = router;
+export default router;

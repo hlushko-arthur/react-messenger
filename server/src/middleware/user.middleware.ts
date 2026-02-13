@@ -8,7 +8,7 @@ export interface AuthRequest extends Request {
 export default function authMiddleware(
 	req: AuthRequest,
 	res: Response,
-	next: NextFunction
+	next: NextFunction,
 ) {
 	const header = req.headers.authorization;
 
@@ -21,10 +21,11 @@ export default function authMiddleware(
 	try {
 		const decoded = jwt.verify(
 			token,
-			process.env.JWT_SECRET as string
+			process.env.JWT_SECRET as string,
 		);
 
 		req.user = decoded;
+
 		next();
 	} catch {
 		res.status(401).json({ message: 'Invalid token' });

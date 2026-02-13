@@ -1,6 +1,8 @@
+import 'dotenv/config';
 import express from "express";
-const cors = require("cors");
-const connectDB = require("./src/config/db");
+import cors from 'cors';
+import cookieParser from "cookie-parser";
+import connectDB from "./src/config/db";
 
 const app = express();
 
@@ -11,14 +13,17 @@ import { responseHelper } from "./src/middleware/response.middleware";
 connectDB();
 
 app.use(cors());
+
 app.use(express.json());
-app.use(responseHelper)
+
+app.use(cookieParser());
+
+app.use(responseHelper);
 
 app.use('/api/auth', authRoutes);
-
 
 const PORT = 8080;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+	console.log(`Server running on port ${PORT}`);
 });
