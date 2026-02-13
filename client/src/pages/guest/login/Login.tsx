@@ -53,12 +53,14 @@ const Login: React.FC = () => {
 			<Input
 				label="Email"
 				width="364px"
+				name="email"
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}/>
 			<Input
 				label="Password"
+				type="password"
 				width="364px"
-				value='12312312'
+				value={password}
 				onChange={(e) => setPassword(e.target.value)}/>
 
 			<div className="a-wrapper">
@@ -91,6 +93,7 @@ const Login: React.FC = () => {
 				onChange={(e) => setEmail(e.target.value)}/>
 			<Input
 				label="Password"
+				type="password"
 				width="364px"
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}/>
