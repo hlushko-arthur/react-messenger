@@ -1,8 +1,8 @@
-import './Login.scss';
 import { useState } from 'react';
 import Input from '../../../components/input/Input';
 import Button from '../../../components/button/Button';
 import http from '../../../services/http.service';
+import './Login.scss';
 
 const Login: React.FC = () => {
 	const [activeForm, setActiveForm] = useState<'login' | 'register'>('login');
@@ -117,7 +117,7 @@ const Login: React.FC = () => {
 	);
 
 	return (
-		<div className='container'>
+		<div data-component="login" className='container'>
 			<div className='logo'>EiChat</div>
 			<div className='form'>
 				<div className='form_message'>
