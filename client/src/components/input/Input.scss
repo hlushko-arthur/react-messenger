@@ -1,4 +1,4 @@
-input {
+.input {
 	width: 192px;
 	height: 60px;
 	border: none;
@@ -8,6 +8,11 @@ input {
 	outline: none;
 	font-size: 17px;
 	box-sizing: border-box;
+
+	&_without-label {
+		height: 36px;
+		padding: 6px;
+	}
 }
 
 .input-wrapper {
@@ -41,4 +46,18 @@ input:not(:placeholder-shown)+label {
 	right: 12px;
 	top: calc(50% - 16px);
 	cursor: pointer;
+}
+
+.clear-wrapper {
+	position: absolute;
+	right: 6px;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+
+	&,
+	img {
+		width: 16px;
+		height: 16px;
+	}
 }
