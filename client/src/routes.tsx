@@ -4,7 +4,7 @@ import Chats from "./pages/chats/Chats";
 import Settings from "./pages/settings/Settings";
 import Contacts from "./pages/contacts/Contacts";
 import Chat from "./pages/chat/Chat";
-import Footer from "./layouts/footer/Footer";
+import Footer from "./core/layouts/footer/Footer";
 
 const router = createBrowserRouter([
 	{

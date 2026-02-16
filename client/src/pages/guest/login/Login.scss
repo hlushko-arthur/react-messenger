@@ -1,5 +1,5 @@
 [data-component="login"] {
-	.container {
+	&.container {
 		height: 100%;
 		width: 100%;
 		display: flex;
@@ -29,6 +29,11 @@
 			.input-wrapper:not(:last-child) {
 				margin-bottom: 16px;
 			}
+		}
+
+		&_message {
+			color: var(--c-red);
+			margin-bottom: 12px;
 		}
 	}
 

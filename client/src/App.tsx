@@ -1,6 +1,6 @@
 import './App.css';
-import Aside from './layouts/main-layout/aside/Aside';
-import Header from './layouts/main-layout/header/Header';
+import Aside from './core/layouts/main-layout/aside/Aside';
+import Header from './core/layouts/main-layout/header/Header';
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/guest/login/Login';
 import Messenger from './pages/messenger/Messenger';

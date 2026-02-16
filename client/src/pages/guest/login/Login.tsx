@@ -1,51 +1,61 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Input from '../../../components/input/Input';
 import Button from '../../../components/button/Button';
 import http from '../../../services/http.service';
+import AuthService from '../../../services/auth.service';
 import './Login.scss';
+import { useNavigate } from 'react-router-dom';
+
+interface User {
+	email: string;
+	password: string;
+	name: string;
+	username: string;
+}
 
 const Login: React.FC = () => {
+	const navigate = useNavigate();
+
 	const [activeForm, setActiveForm] = useState<'login' | 'register'>('login');
 
-	const [email, setEmail] = useState('');
-
-	const [password, setPassword] = useState('');
-
-	const [name, setName] = useState('');
+	const [user, setUser] = useState<User>({
+		email: '',
+		password: '',
+		name: '',
+		username: '',
+	});
 
 	const [formMessage, setFormMessage] = useState<string>('');
 
-	const isLoginButtonDisabled = !email || !password;
+	const isLoginButtonDisabled = !user.email || !user.password;
 
-	const isSignupButtonDisabled = !email || !password || !name;
+	const isSignupButtonDisabled = !user.email || !user.password || !user.name;
 
 	const changeForm = () => {
 		setActiveForm(prev => prev === 'login' ? 'register' : 'login');
 	};
 
+	const handleUserChange = <K extends keyof User>(field: K, value: User[K]) => {
+		setUser(prev => ({
+			...prev,
+			[field]: value,
+		}));
+	};
+
 	const login = async () => {
-		console.log(email, password);
+		const res = await AuthService.login(user);
 
-		const res = await http.post('/auth/login', {
-			email,
-			password,
-		});
-
-		if (!res.data.status) {
-			setFormMessage(res.data.message);
+		if (!res.success) {
+			setFormMessage(res.message);
 
 			return;
 		}
 
-		localStorage.setItem('token', res.data.token);
+		navigate('/chats');
 	};
 
 	const signup = async () => {
-		const res = await http.post('/auth/register', {
-			email,
-			password,
-			name,
-		});
+		const res = await http.post('/auth/register', user);
 	};
 
 	const formLogin = () => (
@@ -54,14 +64,14 @@ const Login: React.FC = () => {
 				label="Email"
 				width="364px"
 				name="email"
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}/>
+				value={user.email}
+				onChange={(e) => handleUserChange('email', e.target.value)}/>
 			<Input
 				label="Password"
 				type="password"
 				width="364px"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}/>
+				value={user.password}
+				onChange={(e) => handleUserChange('password', e.target.value)}/>
 
 			<div className="a-wrapper">
 				<a>Forgot password?</a>
@@ -89,26 +99,31 @@ const Login: React.FC = () => {
 			<Input
 				label="Email"
 				width="364px"
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}/>
+				value={user.email}
+				onChange={(e) => handleUserChange('email', e.target.value)}/>
 			<Input
 				label="Password"
 				type="password"
 				width="364px"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}/>
+				value={user.password}
+				onChange={(e) => handleUserChange('password', e.target.value)}/>
 			<Input
 				label="Name"
 				width='364px'
-				value={name}
-				onChange={(e) => setName(e.target.value)}/>
+				value={user.name}
+				onChange={(e) => handleUserChange('name', e.target.value)}/>
+			<Input
+				label="Username"
+				width='364px'
+				value={user.username}
+				onChange={(e) => handleUserChange('username', e.target.value)}/>
 
 			<Button
 				className="signup-button"
-			 onClick={signup}
-			 disabled={isSignupButtonDisabled}
-			 >
-				Sign Up
+				onClick={signup}
+				disabled={isSignupButtonDisabled}
+			>
+					Sign Up
 			</Button>
 			<Button secondary onClick={changeForm}>
 				I already have an account
@@ -121,7 +136,7 @@ const Login: React.FC = () => {
 			<div className='logo'>EiChat</div>
 			<div className='form'>
 				<div className='form_message'>
-					The password you have entered is incorrect.
+					{ formMessage }
 				</div>
 
 				{activeForm === 'login' ? formLogin() : formRegister()}

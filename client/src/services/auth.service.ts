@@ -1,31 +1,35 @@
-import axios from 'axios';
+import type { User, UserAuth } from '../core/interfaces/user.interface';
+import http from './http.service';
 
-const http = axios.create({
-	baseURL: 'http://localhost:5173/api',
-	headers: {
-		'Content-Type': 'application/json',
-	},
-});
+const AuthService = {
+	login: async (user: UserAuth): Promise<{success: boolean, message?: string}> => {
+		try {
+			const res = await http.post<User>('/auth/login', user);
 
-http.interceptors.request.use((config) => {
-	const token = localStorage.getItem('token');
+			console.log(res);
 
-	if (token) {
-		config.headers.Authorization = `Bearer ${token}`;
-	}
+			if (!res.status) {
+				console.log(res.message);
 
-	return config;
-});
+				return {
+					success: false,
+					message: res.message,
+				};
+			}
 
-http.interceptors.response.use(
-	(res) => res,
-	(err) => {
-		if (err.response?.status === 401) {
-			console.log('Unauthorized');
+			console.log('setitem');
+
+			localStorage.setItem('user', JSON.stringify(res.data));
+
+			return {
+				success: true,
+			};
+		} catch (err) {
+			console.error('Login error:', err);
+
+			return { success: false, message: 'Something went wrong' };
 		}
-
-		return Promise.reject(err);
 	},
-);
+};
 
-export default http;
+export default AuthService;

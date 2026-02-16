@@ -21,7 +21,7 @@ button {
 		cursor: not-allowed;
 	}
 
-	&:active {
+	&:not(:disabled):active {
 		color: black;
 		background-color: white;
 	}

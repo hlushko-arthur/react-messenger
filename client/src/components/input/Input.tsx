@@ -36,7 +36,7 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
 			<input
 				type={isShowPassword ? 'text' : props.type || "text"}
 				className={classes}
-				placeholder={props.placeholder}
+				placeholder={props.placeholder || ''}
 				name={props.name}
 				value={props.value}
 				onChange={props.onChange}
