@@ -3,25 +3,33 @@ import './Button.scss';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   secondary?: boolean;
-  children: React.ReactNode;
+  link?: boolean;
+  iconUrl?: string;
 }
 
-class Button extends React.Component<ButtonProps> {
-	render() {
- 		const { secondary, className } = this.props;
+const Button: React.FC<ButtonProps> = (props) => {
+	const classes = [
+		props.className,
+		props.secondary ? 'button-secondary' : '',
+		props.link ? 'button-link' : '',
+		props.iconUrl ? 'button-icon' : '',
+	].filter(Boolean).join(' ');
 
- 		const classes = [className, secondary ? 'button-secondary' : ''].filter(Boolean).join(' ');
+	console.log(props.iconUrl);
 
- 		return (
- 			<button
-				className={classes}
-				onClick={this.props.onClick}
-				disabled={this.props.disabled}
-			>
-				{this.props.children}
-			</button>
- 		);
- 	}
-}
+	return (
+		<button
+			className={classes}
+			onClick={props.onClick}
+			disabled={props.disabled}
+		>
+			{props.children}
+			{
+				props.iconUrl &&
+				<img src={props.iconUrl}></img>
+			}
+		</button>
+	);
+};
 
 export default Button;

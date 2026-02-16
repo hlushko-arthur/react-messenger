@@ -1,15 +1,37 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Messenger from "./pages/messenger/Messenger";
 import Login from "./pages/guest/login/Login";
-import MainLayout from "./layouts/main-layout/MainLayout";
+import Chats from "./pages/chats/Chats";
+import Settings from "./pages/settings/Settings";
+import Contacts from "./pages/contacts/Contacts";
+import Chat from "./pages/chat/Chat";
+import Footer from "./layouts/footer/Footer";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		Component: MainLayout,
+		element: <Footer></Footer>,
 		children: [
-			{ path: 'messenger', element: <Messenger /> },
-
+			{
+				path: 'contacts',
+				element: <Contacts></Contacts>,
+			},
+			{
+				path: 'chats',
+				element: <Chats></Chats>,
+			},
+			{
+				path: 'settings',
+				element: <Settings></Settings>,
+			},
+		],
+	},
+	{
+		path: '/',
+		children: [
+			{
+				path: 'chats/:userId',
+				element: <Chat></Chat>,
+			},
 		],
 	},
 	{
