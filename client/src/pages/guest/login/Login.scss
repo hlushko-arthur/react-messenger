@@ -20,6 +20,8 @@
 		background-color: #F6F6F6;
 		padding: 24px;
 		border-radius: 6px;
+		width: 90%;
+		box-sizing: border-box;
 
 		&_login,
 		&_register {
@@ -34,6 +36,7 @@
 		&_message {
 			color: var(--c-red);
 			margin-bottom: 12px;
+			text-align: center;
 		}
 	}
 

@@ -6,6 +6,7 @@ import connectDB from "./src/config/db";
 
 const app = express();
 
+import userRoutes from './src/routes/user/user.api';
 import authRoutes from './src/routes/user/user-auth.api';
 import authMiddleware from './src/middleware/user.middleware';
 import { responseHelper } from "./src/middleware/response.middleware";
@@ -21,6 +22,8 @@ app.use(cookieParser());
 app.use(responseHelper);
 
 app.use('/api/auth', authRoutes);
+
+app.use('/api/user', userRoutes);
 
 const PORT = 8080;
 

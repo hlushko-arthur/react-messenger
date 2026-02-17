@@ -21,12 +21,16 @@ router.post('/register', async (req, res) => {
 
 		const user = await User.create({ ...req.body });
 
+		console.log(user);
+
 		res.json({
 			message: 'Registered',
 			userId: user._id,
 		});
-	} catch {
-		res.status(500).json({ message: 'Server error' });
+	} catch (err) {
+		console.log(err);
+
+		res.sendError(500, 'Server error');
 	}
 });
 
@@ -64,7 +68,7 @@ router.post('/login', async (req, res) => {
 	} catch (err) {
 		console.log(err);
 
-		res.status(500).json({ message: err });
+		res.sendError(500, 'Server error');
 	}
 });
 

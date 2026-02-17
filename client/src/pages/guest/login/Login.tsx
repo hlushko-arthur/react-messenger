@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import Input from '../../../components/input/Input';
 import Button from '../../../components/button/Button';
 import http from '../../../services/http.service';
@@ -32,6 +32,8 @@ const Login: React.FC = () => {
 	const isSignupButtonDisabled = !user.email || !user.password || !user.name;
 
 	const changeForm = () => {
+		setFormMessage('');
+
 		setActiveForm(prev => prev === 'login' ? 'register' : 'login');
 	};
 
@@ -62,14 +64,12 @@ const Login: React.FC = () => {
 		<div className='form_login'>
 			<Input
 				label="Email"
-				width="364px"
 				name="email"
 				value={user.email}
 				onChange={(e) => handleUserChange('email', e.target.value)}/>
 			<Input
 				label="Password"
 				type="password"
-				width="364px"
 				value={user.password}
 				onChange={(e) => handleUserChange('password', e.target.value)}/>
 
@@ -98,23 +98,19 @@ const Login: React.FC = () => {
 		<div className='form_register'>
 			<Input
 				label="Email"
-				width="364px"
 				value={user.email}
 				onChange={(e) => handleUserChange('email', e.target.value)}/>
 			<Input
 				label="Password"
 				type="password"
-				width="364px"
 				value={user.password}
 				onChange={(e) => handleUserChange('password', e.target.value)}/>
 			<Input
 				label="Name"
-				width='364px'
 				value={user.name}
 				onChange={(e) => handleUserChange('name', e.target.value)}/>
 			<Input
 				label="Username"
-				width='364px'
 				value={user.username}
 				onChange={(e) => handleUserChange('username', e.target.value)}/>
 
