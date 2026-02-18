@@ -10,12 +10,21 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	value?: string;
 	clearable?: boolean;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onEnterPress?: () => void;
 }
 
 const Input: React.FC<InputProps> = (props: InputProps) => {
 	const [isShowPassword, setIsShowPassword] = React.useState(false);
 
 	const classes = `input ${props.placeholder ? 'input_without-label' : ''}`;
+
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		props.onKeyDown?.(e); // preserve default behavior
+
+		if (e.key === "Enter") {
+			props.onEnterPress?.();
+		}
+	};
 
 	const togglePasswordVisibility = () => {
 		setIsShowPassword(prev => !prev);
@@ -40,6 +49,7 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
 				name={props.name}
 				value={props.value}
 				onChange={props.onChange}
+				onKeyDown={handleKeyDown}
 				style={{ width: props.width, height: props.height}}
 			/>
 			{

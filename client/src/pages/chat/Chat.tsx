@@ -3,9 +3,12 @@ import './Chat.scss';
 import userAvatar from '../../assets/icons/user.png';
 import arrowLeft from '../../assets/icons/arrow-left.png';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Chat: React.FC = () => {
 	const navigate = useNavigate();
+
+	const [message, setMessage] = useState('');
 
 	const openChatsPage = () => {
 		navigate('/chats');
@@ -51,7 +54,15 @@ const Chat: React.FC = () => {
 			</div>
 
 			<div className="input-message">
-				<Input placeholder="Type a message..." width="100%" />
+				<img src="/src/assets/icons/attach-file.png" />
+				<Input
+					value={message}
+					onChange={(e) => setMessage(e.target.value)}
+					onEnterPress={() => console.log('press')}
+					placeholder="Type a message..."
+					width="100%" />
+				<img className='send-icon' src="/src/assets/icons/send.png" />
+				<img className='mic-icon' src="/src/assets/icons/mic.png" />
 			</div>
 		</div>
 	);

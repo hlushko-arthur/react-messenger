@@ -5,9 +5,16 @@ import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
 import debounce from 'lodash/debounce';
 import type { User } from '../../core/interfaces/user.interface';
+import { useNavigate } from 'react-router-dom';
 
 const Contacts: React.FC = () => {
+	const navigate = useNavigate();
+
 	const [users, setUsers] = useState<User[]>([]);
+
+	const openChatPage = (userId: string) => {
+		navigate(`/chats/${userId}`);
+	};
 
 	const debouncedSearch = useMemo(
 		() =>
@@ -37,7 +44,7 @@ const Contacts: React.FC = () => {
 						<div className="users_empty">No users found.</div>
 						:
 						users.map((user) => (
-							<div key={user._id} className="users_item">
+							<div onClick={() => openChatPage(user._id)} key={user._id} className="users_item">
 								<div className="users_item_avatar">
 									<img src="/src/assets/icons/user.png"></img>
 								</div>

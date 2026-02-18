@@ -95,6 +95,58 @@
 	}
 
 	.input-message {
-		background-color: var(--c-blue-light);
+		display: flex;
+		align-items: center;
+		background-color: var(--c-blue);
+		position: absolute;
+		width: 90%;
+		left: 50%;
+		transform: translateX(-50%);
+		border-radius: 12px;
+		box-sizing: border-box;
+		height: 48px;
+		bottom: 16px;
+
+		img {
+			width: 28px;
+			height: 28px;
+			margin: 0 8px;
+		}
+
+		input {
+			transition: 0.2s;
+		}
+
+		.send-icon {
+			width: 0;
+			opacity: 0;
+			overflow: hidden;
+			transform: translateX(100px);
+			transition: 0.2s;
+			margin: 0;
+		}
+
+		.mic-icon {
+			transition: 0.2s;
+		}
+
+		&:has(input:not(:placeholder-shown)) {
+			.mic-icon {
+				transform: translateX(100px);
+				width: 0;
+				opacity: 0;
+				margin: 0;
+				overflow: hidden;
+			}
+
+			.send-icon {
+				transform: translateX(0px);
+				opacity: 1;
+				width: 28px;
+				overflow: auto;
+				margin: 0 8px;
+				min-width: 28px;
+			}
+		}
 	}
 }
